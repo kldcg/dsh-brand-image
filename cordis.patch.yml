@@ -1,0 +1,5 @@
+# dsh-brand-image bundle layer: insert the custom brand-mark plugin row.
+- insert:
+    - id: dsh-brand-image
+      name: 'dsh-brand-image'
+      config: {}

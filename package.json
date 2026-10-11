@@ -1,0 +1,63 @@
+{
+  "name": "dsh-brand-image",
+  "version": "0.1.0",
+  "description": "Replace the DeepSeek Harness sidebar brand mark with your own image and retitle the brand row. | 用你自己的图片替换 DeepSeek Harness 侧栏品牌标志，并自定义品牌标题与版本徽标。",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kldcg/dsh-brand-image.git"
+  },
+  "homepage": "https://github.com/kldcg/dsh-brand-image#readme",
+  "bugs": {
+    "url": "https://github.com/kldcg/dsh-brand-image/issues"
+  },
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "assets",
+    "tools",
+    "cordis.patch.yml",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "deepseek-harness-plugin",
+    "plugin",
+    "cordis",
+    "brand",
+    "logo",
+    "branding",
+    "skin",
+    "sidebar"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ],
+      "platform": "web"
+    }
+  },
+  "peerDependencies": {
+    "cordis": ">=4.0.0-rc <5"
+  },
+  "engines": {
+    "node": "^22.15.0 || >=24.0.0"
+  },
+  "scripts": {
+    "check": "node --check lib/index.js && node --check lib/client.js",
+    "embed": "node tools/embed-image.mjs"
+  }
+}
