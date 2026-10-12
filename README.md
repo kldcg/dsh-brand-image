@@ -37,21 +37,14 @@ node tools/embed-image.mjs C:/path/to/your.png
 改完重装一次（或让 profile 的 HMR 重新加载），图片即生效。不需要改任何代码。
 
 建议：正方形、约 192×192、带透明背景的 PNG 效果最好。标志的显示尺寸只有 20–30 px，
-更大的原图只会让仓库变大。
 
-## 改标题与版本号
+## 改标题
 
 改 `lib/client.js` 顶部这两个常量：
 
 ```js
 const BRAND_TITLE = "DeepSeek Harness";
-const BRAND_VERSION = "0.2.0-rc.2-04f392c";
 ```
-
-**`BRAND_VERSION` 必须自己维护。** DSH 把版本字符串在**构建期内联**进自己的客户端 bundle
-（`ui-sidebar` 里的 `localBuildVersion()` 直接返回一个字面量），没有任何运行时来源——
-环境变量、Host 服务、`window.__DSH_BOOT__` 里都取不到。所以每次重建或升级 DSH 之后，
-来这里改这一行，否则徽标会显示过期版本。
 
 ## 原理
 
@@ -84,19 +77,10 @@ function apply(ctx) {
 客户端半部由 `package.json` 的 `dsh.client` 声明加载，走
 `window.__ModuleLoader__.load({ id, factory })` 这一个入口——因此没有构建步骤。
 
-### 给改这个包的人：不要用 locale 改文案
-
-`ctx.locale.register(ns, locale, dict)` 是**整包替换**该命名空间的字典，不是按键合并。
-只在 `common` 命名空间里注册一个 key，会把该命名空间其余所有文案丢掉，
-整个界面变成英文 key 名。要改某个界面文本，就占用它所在的槽位自己渲染。
-
 ## 限制
 
 - 图片内联，改图必须重跑 `npm run embed` 并重装。目前没有设置页。
-- 使用圆形裁切（`border-radius: 50%`）。若原图是深色背景而你在浅色主题下使用，
-  标志会呈现为一个深色圆——这是刻意的，不是 bug；要完全贴合请用透明背景 PNG。
-- 占用 `sidebar.brand.name` 后，外壳自带的版本徽标不再渲染，版本号由 `BRAND_VERSION`
-  携带，需要你自己跟进（见上）。
+- 若原图是深色背景而你在浅色主题下使用，标志会呈现为一个深色圆——这是刻意的，不是 bug；要完全贴合请用透明背景 PNG。
 
 ## 卸载
 
@@ -104,11 +88,6 @@ function apply(ctx) {
 dsh plugin --profile desktop remove dsh-brand-image
 ```
 
-## 图片版权
-
-`assets/brand.jpg` 是随仓库附带的占位图。**发布前请确认你对所用图片拥有使用权。**
-若该插画来自他人作品，请替换为你自己有权使用的图片，或在 README 中注明作者、来源与授权方式。
-代码本身是 MIT，图片不在 MIT 授权范围内。
 
 ## License
 
