@@ -1,6 +1,6 @@
 {
   "name": "dsh-brand-image",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Replace the DeepSeek Harness sidebar brand mark with your own image and retitle the brand row. | 用你自己的图片替换 DeepSeek Harness 侧栏品牌标志，并自定义品牌标题与版本徽标。",
   "license": "MIT",
   "repository": {
